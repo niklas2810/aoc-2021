@@ -12,7 +12,6 @@ def construct_gamma(count):
             out += "0"
         else:
             out += "1"
-    print(out)
     return int(out, 2)
 
 
@@ -23,7 +22,6 @@ def construct_epsilon(count):
             out += "1"
         else:
             out += "0"
-    print(out)
     return int(out, 2)
 
 lines = []
@@ -33,7 +31,7 @@ with open("input/03.txt", "r") as file:
         lines.append(line.replace("\n", ""))
 
 length = len(lines[0])
-print(length)
+#print(length)
 
 count = []
 
@@ -43,7 +41,7 @@ for i in range(length):
 
 gamma = construct_gamma(count)
 epsilon = construct_epsilon(count)
-print("Gamma:", gamma, "Epsilon:", epsilon)
+#print("Gamma:", gamma, "Epsilon:", epsilon)
 print("Part One:", gamma*epsilon)
 
 
@@ -68,7 +66,7 @@ while len(left) > 1 and index < length:
 
 
 oxygen = left[0]
-print("Oxygen:", oxygen, "left", len(left))
+#print("Oxygen:", oxygen, "left", len(left))
 
 left = list(lines)
 index = 0
@@ -88,10 +86,10 @@ while len(left) > 1 and index < length:
     index += 1
 
 co2 = left[0]
-print("C02:", co2, "left", len(left))
+#print("C02:", co2, "left", len(left))
 
 oxynum = int(oxygen, 2)
 co2num = int(co2, 2)
 
-print("Oxy", oxynum, ", Co2", co2num)
+#print("Oxy", oxynum, ", Co2", co2num)
 print("Part Two:", oxynum*co2num)
