@@ -1,22 +1,35 @@
-fishes = []
+import numpy
 
-part_one=True
+only_part_one=True
 lines = []
 
 with open("input/05.txt") as file:
     for line in file:
-      current = [int(i) for i in line.split(",")]
-      for i in current:
-        fishes[i] += 1
+        start, _, end = line.split(" ")
+
+        start = [int(coord) for coord in start.split(",")]
+        end = [int(coord) for coord in end.split(",")]
+        lines.append([start, end])
+
+# Filter horizontal/vertical
+
+lines = [line for line in lines 
+if line[0][0] == line[1][0] 
+or line[0][1] == line[1][1] 
+or abs(line[0][0]-line[1][0]) == abs(line[0][1] - line[1][1])]
 
 
-def simulate_iterations(duration):
-  for day in range(1,duration+1):
-    add_today = fishes[0]
-    for i in range(1,len(fishes)):
-      fishes[i-1] = fishes[i]
-    fishes[6] += add_today
-    fishes[len(fishes)-1] = add_today
+max_x = 0
+max_y = 0
+for li in lines:
+    max_x = max(max_x, li[0][0], li[1][0])
+    max_y = max(max_y, li[0][1], li[1][1])
+
+
+map = numpy.zeros((max_x+1, max_y+1))
+
+def make_name(x,y):
+    return "{},{}".format(x, y)
 
 def add_point(x, y):
     map[x][y] += 1
@@ -33,7 +46,7 @@ def make_horizontal(y, x1, x2):
         add_point(x, y)
 
 def make_diagonal(x1, y1, x2, y2):
-    if part_one:
+    if only_part_one:
         return
     #print("({},{}) -> ({},{})".format(x1,y1,x2,y2))
     xDir = 1 if x1 < x2 else -1
@@ -64,4 +77,4 @@ def count_intersections():
 
 if __name__ == "__main__":
     print("Max X:", max_x, "Max Y:", max_y)
-    print("Part {}:".format("One" if part_one else "Two"), count_intersections())
+    print("Part One:", count_intersections())
