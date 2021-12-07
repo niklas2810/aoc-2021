@@ -1,6 +1,6 @@
 import numpy
 
-only_part_one=True
+part_one=True
 lines = []
 
 with open("input/05.txt") as file:
@@ -46,7 +46,7 @@ def make_horizontal(y, x1, x2):
         add_point(x, y)
 
 def make_diagonal(x1, y1, x2, y2):
-    if only_part_one:
+    if part_one:
         return
     #print("({},{}) -> ({},{})".format(x1,y1,x2,y2))
     xDir = 1 if x1 < x2 else -1
@@ -77,4 +77,4 @@ def count_intersections():
 
 if __name__ == "__main__":
     print("Max X:", max_x, "Max Y:", max_y)
-    print("Part One:", count_intersections())
+    print("Part {}:".format("One" if part_one else "Two"), count_intersections())
