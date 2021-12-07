@@ -1,35 +1,22 @@
-import numpy
+fishes = []
 
 part_one=True
 lines = []
 
 with open("input/05.txt") as file:
     for line in file:
-        start, _, end = line.split(" ")
-
-        start = [int(coord) for coord in start.split(",")]
-        end = [int(coord) for coord in end.split(",")]
-        lines.append([start, end])
-
-# Filter horizontal/vertical
-
-lines = [line for line in lines 
-if line[0][0] == line[1][0] 
-or line[0][1] == line[1][1] 
-or abs(line[0][0]-line[1][0]) == abs(line[0][1] - line[1][1])]
+      current = [int(i) for i in line.split(",")]
+      for i in current:
+        fishes[i] += 1
 
 
-max_x = 0
-max_y = 0
-for li in lines:
-    max_x = max(max_x, li[0][0], li[1][0])
-    max_y = max(max_y, li[0][1], li[1][1])
-
-
-map = numpy.zeros((max_x+1, max_y+1))
-
-def make_name(x,y):
-    return "{},{}".format(x, y)
+def simulate_iterations(duration):
+  for day in range(1,duration+1):
+    add_today = fishes[0]
+    for i in range(1,len(fishes)):
+      fishes[i-1] = fishes[i]
+    fishes[6] += add_today
+    fishes[len(fishes)-1] = add_today
 
 def add_point(x, y):
     map[x][y] += 1
